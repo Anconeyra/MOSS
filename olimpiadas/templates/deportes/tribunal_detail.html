@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles del Tribunal de Justicia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #344e41; /* Slightly lighter green */
+            margin: 0;
+            padding: 0;
+            color: #0f0b0b;
+        }
+        header {
+            background-color: #2c5f2d; /* Dark green */
+            padding: 20px;
+            text-align: center;
+            color: white;
+            font-size: 2em;
+            /* background-image: url('/path/to/your/image.png'); */
+            background-size: cover;
+        }
+        nav {
+            background-color: #2c5f2d; /* Dark green */
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background-color: #f4f4f4; /* Lighter background */
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #2c3e50; /* Dark text */
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        a {
+            color: #3498db; /* Link color */
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        button {
+            background-color: #2c3e50; /* Button background */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #34495e; /* Button hover background */
+        }
+        form {
+            margin-top: 20px;
+        }
+        form input[type="file"] {
+            margin-right: 10px;
+        }
+        .resoluciones {
+            margin-top: 20px;
+            background-color: #ecf0f1; /* Light grey */
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .resoluciones a {
+            color: #27ae60; /* Green link */
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        XXV OLIMPIADAS EXCADETES DEL CMFB 2024
+    </header>
+    <nav>
+        <a href="#">Inicio</a>
+        <a href="#">Fotos, videos y noticias</a>
+        <a href="#">Hacer login</a>
+    </nav>
+    <div class="container">
+        <h1>Detalle del Tribunal de Justicia</h1>
+        <p>Miembros: {{ tribunal.miembros }}</p>
+        <p>Funciones: {{ tribunal.funciones }}</p>
+        <p>Resoluciones: {{ tribunal.resoluciones }}</p>
+
+        {% if tribunal.archivos %}
+            <h2>Archivos</h2>
+            <ul>
+                {% for archivo in tribunal.archivos.all %}
+                    <li>
+                        <a href="{{ archivo.archivo.url }}" download>{{ archivo.nombre }}</a>
+                        <button onclick="window.location.href='{{ archivo.archivo.url }}'">Descargar</button>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <!-- Formulario para subir archivos -->
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="archivo">
+            <button type="submit">Subir Archivo</button>
+        </form>
+
+        <!-- Enlace directo al archivo en media -->
+        <div class="resoluciones">
+            <p>Resoluciones para estos juegos</p>
+            <a href="/media/BASES_GENERALES_XXIV_JUEGOS_DEPORTIVOS_BOLOGNESINOS_Version_final_1" download>
+                Descargar BASES_GENERALES_XXIV_JUEGOS_DEPORTIVOS_BOLOGNESINOS_Version_final_1
+            </a>
+        </div>
+    </div>
+</body>
+</html>

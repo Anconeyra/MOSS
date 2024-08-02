@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle del Consejo Directivo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #344e41; /* Slightly lighter green */
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+        h1 {
+            background-color: #2c5f2d; /* Dark green */
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        p {
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Detalle del Consejo Directivo</h1>
+    <p>Presidente: {{ object.presidente }}</p>
+    <p>Secretario: {{ object.secretario }}</p>
+    <p>Tesorero: {{ object.tesorero }}</p>
+    <p>Otros Miembros: {{ object.otros_miembros }}</p>
+    <p>Funciones: {{ object.funciones }}</p>
+</body>
+</html>

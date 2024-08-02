@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'deporte.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'images/fondo.jpeg' %}"); 
+            background-size: cover; 
+            background-position: center; 
+            background-attachment: fixed; 
+            margin: 0;
+            padding: 0;
+            color: white; 
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5); 
+            border-radius: 10px; 
+        }
+        h1 {
+            text-align: center;
+            font-weight: bold;
+            background-color: green; 
+            color: white; 
+            padding: 10px; 
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; 
+            background-color: #333;
+            padding: 10px 20px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+            border-bottom: 3px solid transparent;
+        }
+        .nav a:hover, .nav a.active {
+            border-bottom: 3px solid white;
+        }
+        .tablero {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .tarjeta {
+            background-color: #b4b9f7; 
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+        .tarjeta-header img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+        }
+        .tarjeta-body h2 {
+            text-align: center;
+        }
+        footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>XXV OLIMPIADAS EXCADETES DEL CMFB 2024</h1>
+    <div class="nav">
+        <div class="nav-links">
+            <a href="#" class="active">Disciplinas</a>
+            
+            
+            <a href="{% url 'consejo_list' %}" class="{% if request.path == '/consejos/' %}active{% endif %}">Consejo Directivo</a>
+           
+        </div>
+    </div>
+    <div class="container">
+        <h1>Disciplinas</h1>
+        <div class="tablero">
+            {% for deporte in object_list %}
+                <div class="tarjeta">
+                    <div class="tarjeta-header">
+                        <img src="{{ deporte.logo.url }}" alt="{{ deporte.deporte }}">
+                    </div>
+                    <div class="tarjeta-body">
+                        <h2>{{ deporte.deporte }}</h2>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <footer>
+        <div>Copyright © 2024. Todos los derechos reservados</div>
+        <div>MOSS-SPORT</div>
+    </footer>
+    <script>
+        const navLinks = document.querySelectorAll('.nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.forEach(link => link.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

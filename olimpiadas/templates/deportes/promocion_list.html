@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Promociones</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #344e41; /* Color verde ligeramente más claro */
+            margin: 0;
+            padding: 0;
+            color: #fff; /* Texto blanco */
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background-color: #fff; /* Fondo blanco */
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        h1 {
+            background-color: #2c5f2d; /* Color verde oscuro para el encabezado */
+            padding: 20px;
+            text-align: center;
+            color: white; /* Texto blanco */
+            margin-bottom: 20px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            background-color: #3a634f; /* Color verde más oscuro para los elementos de la lista */
+            padding: 10px;
+            border-radius: 5px;
+        }
+        a {
+            color: #fff; /* Texto blanco para los enlaces */
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Listado de Promociones</h1>
+    <div class="container">
+        <ul>
+            {% for promocion in object_list %}
+            <li>
+                <a href="{% url 'promocion_detail' promocion.pk %}">{{ promocion.nombre }}</a>
+            </li>
+            {% empty %}
+            <li>No hay promociones disponibles.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

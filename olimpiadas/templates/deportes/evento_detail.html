@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle del Evento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #344e41; /* Slightly lighter green */
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #3a6351; /* Mid green */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c5f2d; /* Dark green */
+            padding: 20px;
+            border-bottom: 1px solid #3a6351; /* Mid green */
+        }
+        .container p {
+            padding: 10px 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Detalle del Evento</h1>
+        <p>Disciplina: {{ object.disciplina.nombre }}</p>
+        <p>Fecha: {{ object.fecha }}</p>
+        <p>Lugar: {{ object.lugar }}</p>
+    </div>
+</body>
+</html>

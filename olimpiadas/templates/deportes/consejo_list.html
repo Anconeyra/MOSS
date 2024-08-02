@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Consejo Directivo</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'deporte.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'images/fondo.jpeg' %}"); 
+            background-size: cover; 
+            background-position: center; 
+            background-attachment: fixed; 
+            margin: 0;
+            padding: 0;
+            color: white; 
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; 
+            background-color: #333;
+            padding: 10px 20px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+            border-bottom: 3px solid transparent;
+        }
+        .nav a:hover, .nav a.active {
+            border-bottom: 3px solid white;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5); 
+            border-radius: 10px; 
+        }
+        h1 {
+            background-color: #2c5f2d; /* Dark green */
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #3a6351; /* Mid green */
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        li a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>XXV OLIMPIADAS EXCADETES DEL CMFB 2024</h1>
+    <div class="nav">
+        <div class="nav-links">
+            <a href="{% url 'deportes_list' %}" class="{% if request.path == '/deportess/' %}active{% endif %}">Categorías</a>
+            <a href="#" class="active">Consejo Directivo</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Consejo Directivo</h1>
+        <ul>
+            {% for consejo in object_list %}
+            <li>
+                <a href="{% url 'consejo_detail' consejo.pk %}">{{ consejo.presidente }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <footer>
+        <div>Copyright © 2024. Todos los derechos reservados</div>
+        <div>MOSS-SPORT</div>
+    </footer>
+
+    <script>
+        const navLinks = document.querySelectorAll('.nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.forEach(link => link.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

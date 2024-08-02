@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tribunal de Justicia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #344e41; /* Slightly lighter green */
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+        header {
+            background-color: #2c5f2d; /* Dark green */
+            padding: 20px;
+            text-align: center;
+            color: white;
+            font-size: 2em;
+            /* background-image: url('/path/to/your/image.png'); */
+            background-size: cover;
+        }
+        nav {
+            background-color: #2c5f2d; /* Dark green */
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            display: flex;
+        }
+        aside {
+            width: 20%;
+            background-color: #2c5f2d;
+            color: white;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        aside a {
+            color: white;
+            text-decoration: none;
+        }
+        main {
+            width: 80%;
+            padding: 20px;
+        }
+        .tribunal-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .tribunal-list li {
+            background-color: #3a6351; /* Mid green */
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .tribunal-list a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .tribunal-list a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        XXV OLIMPIADAS EXCADETES DEL CMFB 2024
+    </header>
+    <nav>
+        <a href="#">Inicio</a>
+        <a href="#">Fotos, videos y noticias</a>
+        <a href="#">Hacer login</a>
+    </nav>
+    <div class="container">
+        <aside>
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Fotos, videos y noticias</a></li>
+                <li><a href="#">Hacer login</a></li>
+            </ul>
+        </aside>
+        <main>
+            <h1>Tribunal de Justicia</h1>
+            <ul class="tribunal-list">
+                {% for tribunal in object_list %}
+                <li>
+                    <a href="{% url 'tribunal_detail' tribunal.pk %}">{{ tribunal.miembros }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Promociones</title>
+  <style>
+    body {
+      background-color: #228B22; /* Dark green background */
+      font-family: sans-serif;
+    }
+
+    .container {
+      background-color: #fff; /* White container */
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 800px;
+      border-radius: 5px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      cursor: pointer;
+    }
+
+    a {
+      color: #007bff; /* Blue link color */
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Lista de Promociones</h2>
+    <table id="promociones-table">
+      <thead>
+        <tr>
+          <th data-sort="promocion__nombre">Nombre de la Promoción</th>
+          <th data-sort="disciplina__nombre">Disciplina</th>
+          <th data-sort="puntos">Puntos</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-de-posiciones">
+        {% for tabla_de_posiciones in tabla_de_posiciones_list %}
+        <tr>
+          <td>{{ tabla_de_posiciones.promocion.nombre }}</td>
+          <td>{{ tabla_de_posiciones.disciplina.nombre }}</td>
+          <td>{{ tabla_de_posiciones.puntos }}</td>
+          <td><a href="#">Ver</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const table = document.getElementById('promociones-table');
+      const headers = table.querySelectorAll('th[data-sort]');
+      let currentSort = { column: null, order: 'asc' };
+
+      headers.forEach(header => {
+        header.addEventListener('click', () => {
+          const column = header.getAttribute('data-sort');
+          const order = (currentSort.column === column && currentSort.order === 'asc') ? 'desc' : 'asc';
+
+          currentSort = { column, order };
+          sortTable(table, column, order);
+        });
+      });
+
+      function sortTable(table, column, order) {
+        const rows = Array.from(table.querySelector('tbody').rows);
+        const columnIndex = Array.from(headers).findIndex(header => header.getAttribute('data-sort') === column);
+
+        rows.sort((rowA, rowB) => {
+          const cellA = rowA.cells[columnIndex].innerText.toLowerCase();
+          const cellB = rowB.cells[columnIndex].innerText.toLowerCase();
+
+          if (cellA < cellB) return order === 'asc' ? -1 : 1;
+          if (cellA > cellB) return order === 'asc' ? 1 : -1;
+          return 0;
+        });
+
+        rows.forEach(row => table.querySelector('tbody').appendChild(row));
+      }
+    });
+  </script>
+</body>
+</html>
